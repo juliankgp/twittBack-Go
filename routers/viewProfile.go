@@ -17,7 +17,7 @@ func ViewProfile(w http.ResponseWriter, r *http.Request) {
 
 	profile, err := db.GetProfile(ID)
 	if err != nil {
-		http.Error(w, "Error sending the record"+err.Error(), 400)
+		http.Error(w, "Error sending the record "+err.Error(), 400)
 		return
 	}
 

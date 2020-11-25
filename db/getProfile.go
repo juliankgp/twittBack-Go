@@ -17,7 +17,7 @@ func GetProfile(ID string) (models.User, error) {
 	defer cancel()
 
 	db := MongoCN.Database("twittBack")
-	col := db.Collection("user")
+	col := db.Collection("users")
 
 	var profile models.User
 	objID, _ := primitive.ObjectIDFromHex(ID)
