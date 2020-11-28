@@ -21,7 +21,7 @@ func GetTweets(ID string, page int64) ([]*models.ReturnTweets, bool) {
 	var results []*models.ReturnTweets
 
 	condition := bson.M{
-		"userid": ID,
+		"userId": ID,
 	}
 
 	params := options.Find()
@@ -30,15 +30,15 @@ func GetTweets(ID string, page int64) ([]*models.ReturnTweets, bool) {
 	params.SetSort(bson.D{{Key: "date", Value: -1}})
 	params.SetSkip((page - 1) * 20)
 
-	data, err := col.Find(ctx, condition, params)
+	dataColl, err := col.Find(ctx, condition, params)
 	if err != nil {
 		log.Fatal(err.Error())
 		return results, false
 	}
 
-	for data.Next(context.TODO()) {
+	for dataColl.Next(context.TODO()) {
 		var registry models.ReturnTweets
-		err := data.Decode(&registry)
+		err := dataColl.Decode(&registry)
 		if err != nil {
 			return results, false
 		}
