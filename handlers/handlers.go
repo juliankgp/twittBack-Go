@@ -21,6 +21,7 @@ func Controller() {
 	router.HandleFunc("/editProfile", middlew.CheckDB(middlew.ValidJWT(routers.EditProfile))).Methods("PUT")
 	router.HandleFunc("/tweet", middlew.CheckDB(middlew.ValidJWT(routers.SaveTweet))).Methods("POST")
 	router.HandleFunc("/tweets", middlew.CheckDB(middlew.ValidJWT(routers.GetAllTweets))).Methods("GET")
+	router.HandleFunc("/tweet", middlew.CheckDB(middlew.ValidJWT(routers.DeleteTwit))).Methods("DELETE")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

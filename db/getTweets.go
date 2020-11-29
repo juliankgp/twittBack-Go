@@ -15,8 +15,7 @@ func GetTweets(ID string, page int64) ([]*models.ReturnTweets, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("twittBack")
-	col := db.Collection("tweet")
+	col := MongoCN.Database("twittBack").Collection("tweet")
 
 	var results []*models.ReturnTweets
 
