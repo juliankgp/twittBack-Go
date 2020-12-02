@@ -17,8 +17,10 @@ func Controller() {
 
 	router.HandleFunc("/signIn", middlew.CheckDB(routers.SignIn)).Methods("POST")
 	router.HandleFunc("/login", middlew.CheckDB(routers.Login)).Methods("POST")
+
 	router.HandleFunc("/viewprofile", middlew.CheckDB(middlew.ValidJWT(routers.ViewProfile))).Methods("GET")
 	router.HandleFunc("/editProfile", middlew.CheckDB(middlew.ValidJWT(routers.EditProfile))).Methods("PUT")
+
 	router.HandleFunc("/tweet", middlew.CheckDB(middlew.ValidJWT(routers.SaveTweet))).Methods("POST")
 	router.HandleFunc("/tweets", middlew.CheckDB(middlew.ValidJWT(routers.GetAllTweets))).Methods("GET")
 	router.HandleFunc("/tweet", middlew.CheckDB(middlew.ValidJWT(routers.DeleteTwit))).Methods("DELETE")
@@ -28,6 +30,10 @@ func Controller() {
 
 	router.HandleFunc("/banner", middlew.CheckDB(routers.GetBanner)).Methods("GET")
 	router.HandleFunc("/banner", middlew.CheckDB(middlew.ValidJWT(routers.UploadBanner))).Methods("POST")
+
+	router.HandleFunc("/relationship", middlew.CheckDB(middlew.ValidJWT(routers.AddRelationship))).Methods("POST")
+	router.HandleFunc("/relationship", middlew.CheckDB(middlew.ValidJWT(routers.BreakRelationship))).Methods("DELETE")
+	router.HandleFunc("/relationship", middlew.CheckDB(middlew.ValidJWT(routers.GetReltionship))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
